@@ -26,6 +26,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 // END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('app/key.jks.properties')
 
@@ -61,22 +62,10 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        release {
-            storeFile file('./upload-keystore.jks')
-            storePassword "hsn@outlook.hu"
-            keyAlias "upload-hypelify"
-            keyPassword "hsn@outlook.hu"
-//            keyAlias keystoreProperties['keyAlias']
-//            keyPassword keystoreProperties['keyPassword']
-//            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-//            storePassword keystoreProperties['storePassword']
-        }
-    }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
 }
