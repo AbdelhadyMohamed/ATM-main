@@ -1,8 +1,9 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Utilities/constants.dart';
+import 'package:atm/Utilities/constants.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../Utilities/LayoutHelper/condition_widget.dart';
 import '../../../Utilities/strings.dart';

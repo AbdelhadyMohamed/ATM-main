@@ -1,6 +1,5 @@
+import 'package:atm/Modules/Splash/splash_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hypelify/Modules/Splash/splash_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/assets.dart';

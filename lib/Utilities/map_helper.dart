@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'package:atm/Utilities/strings.dart';
+import 'package:atm/Utilities/toast_helper.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Utilities/strings.dart';
-import 'package:hypelify/Utilities/toast_helper.dart';
-import 'package:hypelify/Widgets/custom_button_widget.dart';
+import '../Widgets/custom_button_widget.dart';
 import 'constants.dart';
 import 'helper.dart';
 

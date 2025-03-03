@@ -1,4 +1,3 @@
-export 'package:hypelify/core/Language/locales.dart';
 
 class Strings {
   Strings._();

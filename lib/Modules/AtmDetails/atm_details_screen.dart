@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hypelify/Modules/AtmDetails/atm_details_controller.dart';
-import 'package:hypelify/Utilities/LayoutHelper/loading_screen.dart';
-import 'package:hypelify/models/atm_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../Utilities/LayoutHelper/loading_screen.dart';
 import '../../Utilities/theme_helper.dart';
+import '../../models/atm_model.dart';
+import 'atm_details_controller.dart';
 
 class AtmDetailsScreen extends StatefulWidget {
   static const String routeName = "AtmDetailsScreen";
@@ -34,7 +34,7 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
     con.year=widget.year;
     con.month=widget.month;
     con.visit=widget.visit;
-    con.images = List.filled(10, null);
+    // con.images = List.filled(10, null);
     super.initState();
   }
 
@@ -154,9 +154,10 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
                     ),
                 ],
               ),
-              SizedBox(height: 5.h),
-              Center(child: ElevatedButton(onPressed:con.submit, child: const Text("تأكيد",style: TextStyle(fontSize: 20),)))
-            
+              SizedBox(height: 10.h),
+              Center(child: ElevatedButton(onPressed:con.submit, child: const Text("تأكيد",style: TextStyle(fontSize: 20),))),
+              SizedBox(height: 10.h),
+
             ],
           ),
         ),

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:hypelify/Utilities/shared_preferences.dart';
-
 import '../../../Utilities/api_end_point.dart';
+import '../../../Utilities/shared_preferences.dart';
 import '../../../core/API/generic_request.dart';
 import '../../../core/API/request_method.dart';
 import '../../../core/error/exceptions.dart';

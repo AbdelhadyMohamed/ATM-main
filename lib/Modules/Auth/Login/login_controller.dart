@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Modules/Auth/Login/login_data_handler.dart';
-import 'package:hypelify/Modules/home/home_screen.dart';
-import 'package:hypelify/Utilities/router_config.dart';
-import 'package:hypelify/Utilities/shared_preferences.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../../models/user_model.dart';
+import '../../../Utilities/router_config.dart';
+import '../../../Utilities/shared_preferences.dart';
+import '../../home/home_screen.dart';
+import 'login_data_handler.dart';
 
 class LoginController extends ControllerMVC {
   // singleton

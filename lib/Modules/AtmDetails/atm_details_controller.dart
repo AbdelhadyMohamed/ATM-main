@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Utilities/toast_helper.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import '../../Utilities/router_config.dart';
+import '../../Utilities/toast_helper.dart';
 import '../../models/atm_model.dart';
 import 'atm_details_data_handler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -52,7 +52,8 @@ class AtmDetailsController extends ControllerMVC {
     result.fold((l) {}, (r) => id=r);
   }
   uploadImages() async {
-    await AtmDetailsDataHandler.uploadImages1(
+    await startVisit();
+    final res1=await AtmDetailsDataHandler.uploadImages1(
         year: year,
         month: month,
         government: atm.governorate.toString(),
@@ -61,7 +62,12 @@ class AtmDetailsController extends ControllerMVC {
         atmId: id,
         images: nonNullImages.take(5).toList()
     );
-      await AtmDetailsDataHandler.uploadImages2(
+    res1.fold((l) {
+      ToastHelper.showError(message: "حدث مشكله اثناء الرفع برجاء رفع الصور يدويا");
+    return;
+    },
+       (r) {});
+      final res2=await AtmDetailsDataHandler.uploadImages2(
           year: year,
           month: month,
           government: atm.governorate.toString(),
@@ -70,9 +76,13 @@ class AtmDetailsController extends ControllerMVC {
           atmId: id,
         images: nonNullImages.getRange(5, 10).toList(),
     );
+    res2.fold((l) {
+      ToastHelper.showError(message: "حدث مشكله اثناء الرفع برجاء رفع الصور يدويا");
+      return;
+    },
+            (r) {});
   }
   submit()async{
-    startVisit();
     nonNullImages.clear();
    for(var image in images){
      if(image!=null)nonNullImages.add(image);
@@ -90,7 +100,7 @@ class AtmDetailsController extends ControllerMVC {
   pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera,
-      imageQuality: 5,
+      imageQuality: 25,
     );
     var bytes = (await pickedFile?.readAsBytes())?.lengthInBytes;
     log("kb : ${bytes!/1024}");

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hypelify/Utilities/text_style_helper.dart';
 import '../../../Utilities/helper.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../models/home_model.dart';
+import '../Utilities/text_style_helper.dart';
 
 
 class HomeCardWidget extends StatelessWidget {

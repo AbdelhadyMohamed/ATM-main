@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:hypelify/Utilities/text_style_helper.dart';
+import '../Utilities/text_style_helper.dart';
 
 
 class TitleTextWidget extends StatelessWidget {

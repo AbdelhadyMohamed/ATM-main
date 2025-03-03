@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Modules/Auth/Login/login_screen.dart';
-import 'package:hypelify/Modules/Auth/Visits/visits_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Utilities/LayoutHelper/loading_screen.dart';
 import '../../../Utilities/constants.dart';
+import '../Auth/Login/login_screen.dart';
+import '../Auth/Visits/visits_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";

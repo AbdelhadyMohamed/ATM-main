@@ -1,6 +1,7 @@
-import 'package:hypelify/Modules/Auth/Visits/visits_data_handler.dart';
-import 'package:hypelify/models/visit_model.dart';
+import 'package:atm/Modules/Auth/Visits/visits_data_handler.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+
+import '../../../models/visit_model.dart';
 
 class VisitsController extends ControllerMVC {
   // singleton

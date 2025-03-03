@@ -1,5 +1,6 @@
 
-import 'package:hypelify/models/user_model.dart';
+
+import 'package:atm/models/user_model.dart';
 
 class CommentModel {
   final int? id;

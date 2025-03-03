@@ -1,9 +1,10 @@
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hypelify/Utilities/text_style_helper.dart';
 import '../Utilities/constants.dart';
 import '../Utilities/strings.dart';
+import '../Utilities/text_style_helper.dart';
 import '../Utilities/theme_helper.dart';
 
 class EmptyContentWidget extends StatelessWidget {

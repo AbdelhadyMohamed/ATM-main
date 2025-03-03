@@ -1,4 +1,4 @@
-import 'package:hypelify/models/atm_model.dart';
+import 'package:atm/models/atm_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import 'atm_data_handler.dart';

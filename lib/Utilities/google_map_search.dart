@@ -1,10 +1,10 @@
+import 'package:atm/Utilities/strings.dart';
+import 'package:atm/Utilities/theme_helper.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:hypelify/Utilities/strings.dart';
-import 'package:hypelify/Utilities/theme_helper.dart';
-
 
 
 class GoogleSearchHelper {

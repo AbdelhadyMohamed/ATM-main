@@ -1,6 +1,6 @@
+import 'package:atm/Utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hypelify/Utilities/theme_helper.dart';
 import '../core/network/error_message_model.dart';
 
 class DialogsHelper{

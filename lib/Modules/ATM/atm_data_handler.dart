@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:hypelify/Utilities/shared_preferences.dart';
-import 'package:hypelify/models/atm_model.dart';
+import 'package:atm/Utilities/shared_preferences.dart';
+import 'package:atm/models/atm_model.dart';
 
 import '../../../Utilities/api_end_point.dart';
 import '../../../core/API/generic_request.dart';

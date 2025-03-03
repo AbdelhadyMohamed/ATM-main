@@ -1,15 +1,16 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:atm/Modules/Auth/Visits/visits_controller.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/Modules/ATM/atm_screen.dart';
-import 'package:hypelify/Modules/Auth/Visits/visits_controller.dart';
-import 'package:hypelify/Utilities/constants.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../Utilities/LayoutHelper/condition_widget.dart';
+import '../../../Utilities/constants.dart';
 import '../../../Utilities/strings.dart';
 import '../../../Utilities/theme_helper.dart';
 import '../../../Widgets/empty_content_widget.dart';
+import '../../ATM/atm_screen.dart';
 
 class VisitsScreen extends StatefulWidget {
   static const routeName = "VisitsScreen";

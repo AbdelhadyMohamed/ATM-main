@@ -1,9 +1,11 @@
+import 'package:atm/Utilities/strings.dart';
+import 'package:atm/Utilities/theme_helper.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hypelify/Utilities/router_config.dart';
-import 'package:hypelify/Utilities/strings.dart';
-import 'package:hypelify/Utilities/theme_helper.dart';
+
+import '../Modules/AtmDetails/atm_details_controller.dart';
 
 class ToastHelper{
 

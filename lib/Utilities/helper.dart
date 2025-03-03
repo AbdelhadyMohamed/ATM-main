@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:atm/Utilities/shared_preferences.dart';
+import 'package:atm/Utilities/toast_helper.dart';
+import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hypelify/Utilities/shared_preferences.dart';
-import 'package:hypelify/Utilities/strings.dart';
-import 'package:hypelify/Utilities/toast_helper.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:intl/intl.dart';
 

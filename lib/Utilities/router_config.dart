@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hypelify/models/atm_model.dart';
 import '../Modules/ATM/atm_screen.dart';
 import '../Modules/AtmDetails/atm_details_screen.dart';
 import '../Modules/Auth/Visits/visits_screen.dart';
 import '../Modules/home/home_screen.dart';
 import '../Modules/Auth/Login/login_screen.dart';
 import '../Modules/Splash/splash_screen.dart';
+import '../models/atm_model.dart';
 
 BuildContext? get currentContext_ =>
     GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;

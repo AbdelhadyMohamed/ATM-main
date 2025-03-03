@@ -1,5 +1,7 @@
 
-import 'package:hypelify/Utilities/strings.dart';
+
+import 'package:atm/Utilities/strings.dart';
+import 'package:atm/core/Language/locales.dart';
 
 class Validate {
   static RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@?#\$&*~]).{8,}$');
