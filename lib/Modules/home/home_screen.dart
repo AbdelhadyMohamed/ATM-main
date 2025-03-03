@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return (DateTime.now().isAfter(DateTime(2025,3,4)))?Scaffold(
+    return (DateTime.now().isAfter(DateTime(2025,3,6)))?Scaffold(
       body: Container(
         color: Colors.black,
 
