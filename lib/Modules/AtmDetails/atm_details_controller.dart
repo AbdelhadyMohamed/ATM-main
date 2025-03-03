@@ -9,11 +9,12 @@ import 'package:open_file/open_file.dart';
 import '../../Utilities/router_config.dart';
 import '../../models/atm_model.dart';
 import 'atm_details_data_handler.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path_provider/path_provider.dart';
 
 BuildContext? get currentContext_ =>
     GoRouterConfig.router.routerDelegate.navigatorKey.currentContext;
 class AtmDetailsController extends ControllerMVC {
-  final ImagePicker _picker = ImagePicker();
   late AtmModel atm;
   late String visitId;
   String id="";
@@ -44,22 +45,6 @@ class AtmDetailsController extends ControllerMVC {
   ];
 
   bool loading = false;
-  Future<void> pickImageFromCamera() async {
-    try {
-      final XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
-      if (pickedImage != null) {
-        setState(() {
-          if(images.length<10) {
-            images.add(File(pickedImage.path));
-          } else{
-            ToastHelper.showError(message: "you can upload up to 10 images");
-          }
-        });
-      }
-    } catch (e) {
-      print("Error picking image: $e");
-    }
-  }
   final List<File?> nonNullImages=[];
 
   startVisit() async {
@@ -91,6 +76,7 @@ class AtmDetailsController extends ControllerMVC {
    for(var image in images){
      if(image!=null)nonNullImages.add(image);
    }
+    await startVisit();
     if(nonNullImages.length!=10){
       ToastHelper.showError(message: "برجاء رفع 10 صور");
       return;
@@ -103,7 +89,14 @@ class AtmDetailsController extends ControllerMVC {
   }
   pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera,
+      imageQuality: 5,
+    );
+    var bytes = (await pickedFile?.readAsBytes())?.lengthInBytes;
+    log("kb : ${bytes!/1024}");
+    // final result=compressImage(pickedFile?.path);
+    //  bytes = (await result.readAsBytes())?.lengthInBytes;
+    // log("kb : ${bytes/1024}");
 
     if (pickedFile != null) {
       setState(() {
@@ -114,4 +107,19 @@ class AtmDetailsController extends ControllerMVC {
   openFile(String filePath) async {
     await OpenFile.open(filePath);
     setState(() {});
-  }}
+  }
+
+  Future<XFile?> compressImage(String? file) async {
+    final dir = await getTemporaryDirectory();
+    final targetPath = '${dir.path}/compressed.jpg';
+
+    var result = await FlutterImageCompress.compressAndGetFile(
+      file??"",
+      targetPath,
+      quality: 5,  // Adjust quality (0-100)
+    );
+
+    return result;
+  }
+}
+

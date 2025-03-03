@@ -35,7 +35,6 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
     con.month=widget.month;
     con.visit=widget.visit;
     con.images = List.filled(10, null);
-    con.startVisit();
     super.initState();
   }
 
