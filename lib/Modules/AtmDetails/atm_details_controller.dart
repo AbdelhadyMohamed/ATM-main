@@ -72,11 +72,11 @@ class AtmDetailsController extends ControllerMVC {
     );
   }
   submit()async{
+    startVisit();
     nonNullImages.clear();
    for(var image in images){
      if(image!=null)nonNullImages.add(image);
    }
-    await startVisit();
     if(nonNullImages.length!=10){
       ToastHelper.showError(message: "برجاء رفع 10 صور");
       return;
