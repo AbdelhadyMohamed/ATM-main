@@ -52,10 +52,16 @@ class AtmDetailsController extends ControllerMVC {
     final result=await AtmDetailsDataHandler.startVisit(
         comment: textEditingController.text,
         taskId: atm.taskId.toString(), visitId: visitId,atmId: atm.atmId.toString());
-    result.fold((l) {}, (r) => id=r);
+    result.fold((l) {return false;}, (r) => id=r);
+    return true;
   }
-  uploadImages() async {
-    await startVisit();
+   uploadImages() async {
+    final visitStarted =await startVisit();
+    // Future.delayed(Duration(microseconds: 500));
+    if (visitStarted == null || !visitStarted) {
+      ToastHelper.showError(message: "فشل بدء الزيارة، لن يتم تحميل الصور.");
+      return false;
+    }
     final res1=await AtmDetailsDataHandler.uploadImages1(
         year: year,
         month: month,
@@ -67,7 +73,7 @@ class AtmDetailsController extends ControllerMVC {
     );
     res1.fold((l) {
       ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
-    return;
+    return false;
     },
        (r) {});
       final res2=await AtmDetailsDataHandler.uploadImages2(
@@ -81,9 +87,10 @@ class AtmDetailsController extends ControllerMVC {
     );
     res2.fold((l) {
       ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
-      return;
+      return false;
     },
             (r) {});
+    return true;
   }
   submit()async{
     nonNullImages.clear();
@@ -95,9 +102,11 @@ class AtmDetailsController extends ControllerMVC {
       return;
     }
     setState(() {loading=true;});
-    await uploadImages();
-     ToastHelper.showSuccess(message: "تم تأكيد الصور");
-     if(currentContext_!.mounted)currentContext_!.pop();
+    final result=await uploadImages();
+   if(result){
+      ToastHelper.showSuccess(message: "تم تأكيد الصور");
+      if (currentContext_!.mounted) currentContext_!.pop();
+    }
     setState(() {loading=false;});
   }
   pickImage(int index) async {
@@ -108,8 +117,8 @@ class AtmDetailsController extends ControllerMVC {
     var bytes = (await pickedFile?.readAsBytes())?.lengthInBytes;
     log("kb : ${bytes!/1024}");
     // final result=compressImage(pickedFile?.path);
-    //  bytes = (await result.readAsBytes())?.lengthInBytes;
-    // log("kb : ${bytes/1024}");
+     // bytes = (await result.readAsBytes())?.lengthInBytes;
+    log("kb : ${bytes/1024}");
 
     if (pickedFile != null) {
       setState(() {
@@ -129,7 +138,7 @@ class AtmDetailsController extends ControllerMVC {
     var result = await FlutterImageCompress.compressAndGetFile(
       file??"",
       targetPath,
-      quality: 5,  // Adjust quality (0-100)
+      quality: 25,  // Adjust quality (0-100)
     );
 
     return result;
