@@ -87,24 +87,6 @@ class AtmDetailsDataHandler {
       return Left(ServerFailure(failure.errorMessageModel));
     }
   }
-  // static Future<Either<Failure,List<String>>> getImages(
-  //     {required String taskId,required String visitId,required String atmId}
-  //     )
-  // async{
-  //   try {
-  //     final response = await GenericRequest<List<String>>(
-  //       method: RequestApi.postJson(
-  //         url: APIEndPoint.atmVisitPhotos,
-  //         bodyJson: {"taskId":taskId,"visitId":visitId,"workerId":SharedPref.getCurrentUser()?.id,"atmId":atmId},
-  //       ),
-  //       fromMap: (_) => _["status"],
-  //     ).getObject();
-  //     return Right(response);
-  //   } on ServerException catch (failure) {
-  //     ServerFailure.handleError(failure.errorMessageModel);
-  //     return Left(ServerFailure(failure.errorMessageModel));
-  //   }
-  // }
   static Future<Either<Failure, String>> startVisit({required String taskId,required String visitId,required String atmId,String? comment}) async {
     try {
       StartVisitModel response = await GenericRequest<StartVisitModel>(
