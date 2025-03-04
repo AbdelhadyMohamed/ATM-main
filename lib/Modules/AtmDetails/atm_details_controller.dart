@@ -21,6 +21,7 @@ class AtmDetailsController extends ControllerMVC {
   late String visit;
   late String year;
   late String month;
+  late TextEditingController textEditingController;
 
   // singleton
   factory AtmDetailsController() {
@@ -48,7 +49,9 @@ class AtmDetailsController extends ControllerMVC {
   final List<File?> nonNullImages=[];
 
   startVisit() async {
-    final result=await AtmDetailsDataHandler.startVisit(taskId: atm.taskId.toString(), visitId: visitId,atmId: atm.atmId.toString());
+    final result=await AtmDetailsDataHandler.startVisit(
+        comment: textEditingController.text,
+        taskId: atm.taskId.toString(), visitId: visitId,atmId: atm.atmId.toString());
     result.fold((l) {}, (r) => id=r);
   }
   uploadImages() async {
@@ -63,7 +66,7 @@ class AtmDetailsController extends ControllerMVC {
         images: nonNullImages.take(5).toList()
     );
     res1.fold((l) {
-      ToastHelper.showError(message: "حدث مشكله اثناء الرفع برجاء رفع الصور يدويا");
+      ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
     return;
     },
        (r) {});
@@ -77,7 +80,7 @@ class AtmDetailsController extends ControllerMVC {
         images: nonNullImages.getRange(5, 10).toList(),
     );
     res2.fold((l) {
-      ToastHelper.showError(message: "حدث مشكله اثناء الرفع برجاء رفع الصور يدويا");
+      ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
       return;
     },
             (r) {});

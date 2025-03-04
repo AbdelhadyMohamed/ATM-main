@@ -105,12 +105,12 @@ class AtmDetailsDataHandler {
   //     return Left(ServerFailure(failure.errorMessageModel));
   //   }
   // }
-  static Future<Either<Failure, String>> startVisit({required String taskId,required String visitId,required String atmId}) async {
+  static Future<Either<Failure, String>> startVisit({required String taskId,required String visitId,required String atmId,String? comment}) async {
     try {
       StartVisitModel response = await GenericRequest<StartVisitModel>(
         method: RequestApi.postJson(
           url: APIEndPoint.startVisit,
-          bodyJson: {"task_id":taskId,"visit_id":visitId,"worker_id":SharedPref.getCurrentUser()?.id,"atm_id":atmId},
+          bodyJson: {"task_id":taskId,"visit_id":visitId,"worker_id":SharedPref.getCurrentUser()?.id,"atm_id":atmId,"comment":comment??""},
         ),
         fromMap:StartVisitModel.fromJson,
       ).getResponse();

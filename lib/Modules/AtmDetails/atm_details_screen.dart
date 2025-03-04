@@ -1,3 +1,4 @@
+import 'package:atm/Widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -34,10 +35,15 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
     con.year=widget.year;
     con.month=widget.month;
     con.visit=widget.visit;
-    // con.images = List.filled(10, null);
+    con.textEditingController=TextEditingController();
+    con.images = List.filled(10, null);
     super.initState();
   }
-
+  @override
+  void dispose() {
+    con.textEditingController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,6 +159,12 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
                       ],
                     ),
                 ],
+              ),
+              SizedBox(height: 10.h),
+              TextFieldWidget(hint: 'اضف تعليقا',
+                // insidePadding: EdgeInsets.all(20),
+                controller: con.textEditingController,
+
               ),
               SizedBox(height: 10.h),
               Center(child: ElevatedButton(onPressed:con.submit, child: const Text("تأكيد",style: TextStyle(fontSize: 20),))),
