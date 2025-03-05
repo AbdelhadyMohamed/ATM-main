@@ -16,7 +16,7 @@
     </queries>
 
     <application
-        android:label="hypelify"
+        android:label="atm"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

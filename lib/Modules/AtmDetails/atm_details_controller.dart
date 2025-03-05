@@ -55,55 +55,81 @@ class AtmDetailsController extends ControllerMVC {
     result.fold((l) {return false;}, (r) => id=r);
     return true;
   }
-   uploadImages() async {
-    final visitStarted =await startVisit();
-    // Future.delayed(Duration(microseconds: 500));
+  Future<bool> uploadImages() async {
+    const int maxRetries = 3; // Maximum number of retries
+    int attempt = 0;
+
+    final visitStarted = await startVisit();
     if (visitStarted == null || !visitStarted) {
       ToastHelper.showError(message: "فشل بدء الزيارة، لن يتم تحميل الصور.");
       return false;
     }
-    final res1=await AtmDetailsDataHandler.uploadImages1(
+
+    List<File?> firstBatch = nonNullImages.take(5).toList();
+    List<File?> secondBatch = nonNullImages.length > 5
+        ? nonNullImages.getRange(5, nonNullImages.length).toList()
+        : [];
+
+    // Function to retry image upload
+    Future<bool> tryUpload(Function uploadFunction) async {
+      attempt = 0;
+      while (attempt < maxRetries) {
+        final result = await uploadFunction();
+        if (result.isRight()) return true; // Success
+        attempt++;
+        if (attempt < maxRetries) {
+          await Future.delayed(const Duration(seconds: 2)); // Wait before retrying
+        }
+      }
+      return false; // All retries failed
+    }
+
+    bool upload1Success = await tryUpload(() async => await AtmDetailsDataHandler.uploadImages1(
+      year: year,
+      month: month,
+      government: atm.governorate.toString(),
+      visit: visit.toString(),
+      atmName: atm.atm ?? "",
+      atmId: id,
+      images: firstBatch,
+    ));
+
+    if (!upload1Success) {
+      ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
+      return false;
+    }
+
+    if (secondBatch.isNotEmpty) {
+      bool upload2Success = await tryUpload(() async => await AtmDetailsDataHandler.uploadImages2(
         year: year,
         month: month,
         government: atm.governorate.toString(),
         visit: visit.toString(),
-        atmName: atm.atm??"",
+        atmName: atm.atm ?? "",
         atmId: id,
-        images: nonNullImages.take(5).toList()
-    );
-    res1.fold((l) {
-      ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
-    return false;
-    },
-       (r) {});
-      final res2=await AtmDetailsDataHandler.uploadImages2(
-          year: year,
-          month: month,
-          government: atm.governorate.toString(),
-          visit: visit.toString(),
-          atmName: atm.atm??"",
-          atmId: id,
-        images: nonNullImages.getRange(5, 10).toList(),
-    );
-    res2.fold((l) {
-      ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
-      return false;
-    },
-            (r) {});
+        images: secondBatch,
+      ));
+
+      if (!upload2Success) {
+        ToastHelper.showError(message: "حدث مشكله اثناء رفع الصور برجاء رفع الصور يدويا");
+        return false;
+      }
+    }
+
     return true;
   }
   submit()async{
     nonNullImages.clear();
-   for(var image in images){
-     if(image!=null)nonNullImages.add(image);
-   }
+    for(var image in images){
+      if(image!=null)nonNullImages.add(image);
+    }
     if(nonNullImages.length!=10){
       ToastHelper.showError(message: "برجاء رفع 10 صور");
       return;
     }
     setState(() {loading=true;});
     final result=await uploadImages();
-   if(result){
+    if(result){
       ToastHelper.showSuccess(message: "تم تأكيد الصور");
       if (currentContext_!.mounted) currentContext_!.pop();
     }
@@ -117,7 +143,7 @@ class AtmDetailsController extends ControllerMVC {
     var bytes = (await pickedFile?.readAsBytes())?.lengthInBytes;
     log("kb : ${bytes!/1024}");
     // final result=compressImage(pickedFile?.path);
-     // bytes = (await result.readAsBytes())?.lengthInBytes;
+    // bytes = (await result.readAsBytes())?.lengthInBytes;
     log("kb : ${bytes/1024}");
 
     if (pickedFile != null) {
