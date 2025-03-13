@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:atm/Widgets/custom_button_widget.dart';
 import 'package:atm/core/Language/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,13 +44,14 @@ class _AtmScreenState extends StateMVC<AtmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: ThemeClass.of(context).background,
+        backgroundColor: Colors.white,
         title: Text(
           Strings.atms.tr,
-          style: TextStyle(color: ThemeClass.of(context).textColorMain),
+          style: TextStyle(color: Colors.black),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -91,7 +93,7 @@ class _AtmScreenState extends StateMVC<AtmScreen> {
                         const Spacer(),
                         Center(
                             child: EmptyContentWidget(
-                          msg: Strings.noResultFound.tr,
+                          msg: "لا يوجد نتائج",
                         )),
                         const Spacer(),
                       ],
@@ -143,13 +145,13 @@ class _AtmScreenState extends StateMVC<AtmScreen> {
                                         ),
 
                                         const Spacer(),
-                                        const Icon(Icons.arrow_forward_ios_rounded)
+                                        const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black)
                                       ],
                                     ),
                                     space10Vertical,
                                     Row(
                                       children: [
-                                        Text(con.filteredAtms[index].address ?? ''),
+                                        Text(con.filteredAtms[index].address ?? '',style: TextStyle(color: Colors.black),),
                                         const Spacer(),
 
                                       ],
@@ -161,6 +163,16 @@ class _AtmScreenState extends StateMVC<AtmScreen> {
                           }),
                     ),
                   )),
+            ),
+            CustomButtonWidget.primary(
+              width: 200.w,
+              title: "Refresh",
+              onTap: () {
+                con.atms.clear();
+                con.filteredAtms.clear();
+                con.getATM(id: widget.id);
+              },
+
             ),
           ],
         ),

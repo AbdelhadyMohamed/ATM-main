@@ -26,8 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: LoadingScreen(
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('الصفحة الرئيسية'),
+              title: const Text('الصفحة الرئيسية',style: TextStyle(color: Colors.black),),
               centerTitle: true,
+              backgroundColor: Colors.white,
               leading: const SizedBox(),
               actions:  [InkWell(
                   onTap:() =>context.pushReplacementNamed(LoginScreen.routeName),

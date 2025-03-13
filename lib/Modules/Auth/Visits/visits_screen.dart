@@ -37,13 +37,17 @@ class _VisitsScreenState extends StateMVC<VisitsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: ThemeClass.of(context).background,
+        // backgroundColor: ThemeClass.of(context).background,
+        backgroundColor: Colors.white,
         title: Text(
-          Strings.visits.tr,
-          style: TextStyle(color: ThemeClass.of(context).textColorMain),
+         "الزيارات",
+          style: TextStyle(color: Colors.black),
+          // style: TextStyle(color: ThemeClass.of(context).textColorMain),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -65,7 +69,7 @@ class _VisitsScreenState extends StateMVC<VisitsScreen> {
                   const Spacer(),
                   Center(
                       child: EmptyContentWidget(
-                    msg: Strings.noResultFound.tr,
+                    msg: "لا يوجد نتائج",
                   )),
                   const Spacer(),
                 ],
@@ -103,7 +107,12 @@ class _VisitsScreenState extends StateMVC<VisitsScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Text(con.visits[index].visit ?? ''),
+                                  Text(con.visits[index].visit ?? '',
+                                  style: TextStyle(
+                                    color: Colors.black,
+
+                                  ),
+                                  ),
                                   space25Horizontal,
                                   Text(
                                     con.visits[index].code ?? '',
@@ -112,13 +121,17 @@ class _VisitsScreenState extends StateMVC<VisitsScreen> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                   const Spacer(),
-                                  const Icon(Icons.arrow_forward_ios_rounded)
+                                  const Icon(Icons.arrow_forward_ios_rounded,
+                                      color: Colors.black,
+                                      )
                                 ],
                               ),
                               space10Vertical,
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: Text(con.visits[index].progress ?? ''),
+                                child: Text(con.visits[index].progress ?? '', style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),),
                               ),
                             ],
                           ),

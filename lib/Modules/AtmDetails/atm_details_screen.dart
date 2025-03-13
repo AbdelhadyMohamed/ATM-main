@@ -47,12 +47,13 @@ class _AtmDetailsScreenState extends StateMVC<AtmDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: ThemeClass.of(context).background,
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           "Visit Code: ${widget.code}",
-          style: TextStyle(color: ThemeClass.of(context).textColorMain),
+          style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
